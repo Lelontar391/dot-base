@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dot</groupId>
     <artifactId>dot-base</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>dot-base</name>
     <description>dot-base for Spring Boot</description>
 

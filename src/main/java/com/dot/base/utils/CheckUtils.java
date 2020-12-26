@@ -4,8 +4,6 @@ package com.dot.base.utils;
  * @author : xuzhennan
  * @Project : dot-admin
  * @Package : com.dot.admin.util
- * @email : xuzhennan@58.com
- * @date : 2020年12月24日 11:20 上午
  */
 
 import com.dot.base.exception.ValidateException;

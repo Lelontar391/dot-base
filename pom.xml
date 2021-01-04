@@ -132,7 +132,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.7</version>
+            <version>2.11.3</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -156,7 +156,7 @@
         <dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl</artifactId>
-            <version>2.7.23</version>
+            <version>2.7.14</version>
         </dependency>
         <!-- 模板引擎 ibeetl end -->
         <!-- pic begin -->
@@ -168,9 +168,46 @@
         <!-- pic end -->
     </dependencies>
 
+    <scm>
+        <url>https://github.com/Lelontar391/dot-base</url>
+        <connection>scm:git@github.com:Lelontar391/dot-base.git</connection>
+        <developerConnection>scm:git:git@github.com:Lelontar391/dot-base.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id> internal.repo </id>
+            <name> Temporary Staging Repository </name>
+            <url> file://${project.build.directory}/dot-base </url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <!-- 此tag下面的所有plugins都是关于上传jar包的依赖 -->
         <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+            <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -211,6 +248,19 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-site-renderer</artifactId>
+                        <version>1.8</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
@@ -223,7 +273,7 @@
                         指定要上传的分支, refs/heads 这个不变，后面的分支名可选，可以采取一个jar包使用一个分支的策略。
                         若多个jar包同时发布在同一个分支的话，会覆盖。。。。
                     -->
-                    <branch>refs/heads/master</branch>
+                    <branch>refs/heads/dot-base</branch>
                     <!-- 包含outputDirectory标签内填的文件夹中的所有内容 -->
                     <includes>
                         <include>**/*</include>
@@ -245,6 +295,7 @@
                 <executions>
                     <execution>
                         <goals>
+                            <!--suppress MybatisMapperXmlInspection -->
                             <goal>site</goal>
                         </goals>
                         <phase>deploy</phase>
